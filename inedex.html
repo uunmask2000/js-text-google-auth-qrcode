@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>產生 google qrcode 驗證</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div id="_txt">
+
+    </div>
+
+    <input type="text" id="name" value="auth">
+    <input type="text" id="secret" value="aaaaaa">
+    <input type="text" id="user" value="view_user">
+
+
+    <button onclick="draw()">產生 google 驗證器 QRcode</button>
+
+    <div id="qrcode"></div>
+
+
+    <script>
+        function draw() {
+            var name = $('#name').val();
+            var secret = $('#secret').val();
+            var user = $('#user').val();
+            var _txt = 'otpauth://totp/' + user + ':' + name + '?secret=' + secret + '&issuer=' + user + '&algorithm=SHA1&digits=6&period=30';
+
+            $('#qrcode').empty();
+            $('#_txt').empty();
+            $('#_txt').html(_txt)
+            console.log(_txt);
+            new QRCode(document.getElementById("qrcode"), _txt);
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
